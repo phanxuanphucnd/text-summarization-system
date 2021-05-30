@@ -1,0 +1,49 @@
+[
+    {
+        "name": "CafeF",
+        "group": "international_news",
+        "start_url": "https://cafef.vn/tai-chinh-quoc-te.chn",
+        "root_url": "https://cafef.vn",
+        "next_link": "https://cafef.vn/timeline/32/trang-{0}.chn",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "international_news",
+        "start_url": "https://vietnambiz.vn/tai-chinh/quoc-te.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/tai-chinh/quoc-te/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "international_news",
+        "start_url": "https://vietnambiz.vn/hang-hoa/nang-luong.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/hang-hoa/nang-luong/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "international_news",
+        "start_url": "https://vietnambiz.vn/hang-hoa/vang.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/hang-hoa/vang/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "international_news",
+        "start_url": "https://vietnambiz.vn/hang-hoa/nguyen-lieu.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/hang-hoa/nguyen-lieu/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Tinnhanhchungkhoan",
+        "group": "international_news",
+        "start_url": "https://tinnhanhchungkhoan.vn/quoc-te/",
+        "root_url": "https://tinnhanhchungkhoan.vn",
+        "limit": 100
+    }
+]

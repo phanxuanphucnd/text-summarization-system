@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Vietnambiz",
+        "group": "real_estate",
+        "start_url": "https://vietnambiz.vn/nha-dat.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/nha-dat/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "CafeF",
+        "group": "real_estate",
+        "start_url": "https://cafef.vn/bat-dong-san.chn",
+        "root_url": "https://cafef.vn",
+        "next_link": "https://cafef.vn/timeline/35/trang-{0}.chn",
+        "limit": 100
+    },
+    {
+        "name": "ndh",
+        "group": "real_estate",
+        "start_url": "https://ndh.vn/bat-dong-san",
+        "root_url": "https://ndh.vn",
+        "limit": 100
+    }
+]

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily News</title>
+
+
+    <!-- Import -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/tinymce.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="flex flex-wrap">
+        <div class="w-full">
+            <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-blue-500">
+                <div class="w-full mx-auto flex flex-wrap items-center justify-between">
+                    <div
+                        class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
+                        <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white font-medium"
+                            href="{{ url_for('home') }}">
+                            Home
+                        </a>
+                    </div>
+
+                    <div class="flex flex-wrap justify-end">
+                        <div class="w-full px-6">
+                            <div class="relative inline-flex align-middle w-full">
+                                <button class="w-48 focus:outline-none" style="transition:all .15s ease" type="button"
+                                    onclick="openDropdown(event,'dropdown-id')">
+                                    <img class="h-8 w-8 rounded-full object-cover m-auto" src="static/images/avatar.png"
+                                        alt="" />
+                                    <p class="text-xs" style="color: white;">{{ username_login }}</p>
+                                </button>
+                                <div class="hidden bg-white  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                                    style="min-width:12rem" id="dropdown-id">
+                                    <a href="/logout"
+                                        class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="container m-auto w-7/12">
+        <main class="antialiased ">
+            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal table-layout-fixed">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center w-24">
+                                    ID
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center w-48">
+                                    Stock Code
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Company name
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Category
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden table-scroll">
+                    <table class="min-w-full leading-normal table-layout-fixed">
+                        <tbody>
+                            {% for i in range(no_stock) %}
+                            <tr>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm w-24">
+                                    <p class="text-gray-900 break-words text-center w-24">
+                                        {{ i + 1 }}
+                                    </p>
+
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center w-48">
+                                    <p class="text-gray-900 text-center w-48">
+                                        <span
+                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden
+                                                class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative"> {{ vn30[i]['code'] }} </span>
+                                        </span>
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 text-center">
+                                        <span
+                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden
+                                                class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative"> {{ vn30[i]['company_name'] }} </span>
+                                        </span>
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <select name="stock-code" id="{{ vn30[i]['code'] }}" value="{{ vn30[i]['group'] }}"
+                                        onchange="change_group(this)"
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        {% for g in categories %}
+                                        {% if g == vn30[i]['group'] %}
+                                        <option selected class="text-gray-700" value="{{ g }}">{{ g }}</option>
+                                        {% else %}
+                                        <option class="text-gray-700" value="{{ g }}">{{ g }}</option>
+                                        {% endif%}
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <form action="/vn30_save" method="POST">
+                        <div class="float-right mt-2 mx-5">
+                            <button type="submit" id="submit_filter" name="submit_filter" value="submit"
+                                onclick="alert('Saved!');"
+                                class="button_predict bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full my-2 focus:outline-none">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        var stringToHTML = function (str) {
+            var dom = document.createElement('div');
+            dom.innerHTML = str;
+            return dom;
+        };
+
+        function change_group(obj) {
+            $.post("vn30_change_group", { code: obj.id, group: obj.value }, function (data, status) {
+                console.log(data);
+                console.log(status);
+            });
+        }
+
+    </script>
+</body>
+
+</html>

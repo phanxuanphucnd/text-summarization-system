@@ -1,0 +1,219 @@
+COMPANY:
+  1:
+    keywords:
+      - STB
+      - Ngân hàng Thương mại Cổ phần Sài Gòn Thương Tín
+      - Ngân hàng TMCP Sài Gòn Thương Tín
+      - Sacombank
+    code:
+      STB
+  2:
+    keywords:
+      - VCB
+      - Ngân hàng TMCP Ngoại Thương Việt Nam
+      - Ngân hàng thương mại cổ phần Ngoại thương Việt Nam
+      - Vietcombank
+    code:
+      VCB
+  3:
+    keywords:
+      - BID
+      - Ngân hàng Thương mại Cổ phần Đầu tư và Phát triển Việt Nam
+      - Ngân hàng Đầu tư và Phát triển Việt Nam
+      - Ngân hàng TMCP Đầu tư và Phát triển Việt Nam
+      - BIDV
+    code:
+      BID
+  4:
+    keywords:
+      - CTG
+      - Ngân hàng Thương mại Cổ phần Công Thương Việt Nam
+      - VietinBank
+      - Ngân hàng TMCP Công Thương Việt Nam
+    code:
+      CTG
+  5:
+    keywords:
+      - TCB
+      - Ngân hàng TMCP Kỹ Thương Việt Nam
+      - Ngân hàng Thương mại cổ phần Kỹ Thương Việt Nam
+      - Techcombank
+    code:
+      TCB
+  6:
+    keywords:
+      - VPB
+      - Ngân hàng TMCP Việt Nam Thịnh Vượng
+      - Ngân hàng Thương mại cổ phần Việt Nam Thịnh Vượng
+      - VPBank
+    code:
+      VPB
+  7:
+    keywords:
+      - MBB
+      - Ngân hàng Thương mại Cổ phần Quân Đội
+      - Ngân hàng Quân đội
+      - Ngân hàng TMCP Quân Đội
+    code:
+      MBB
+  8:
+    keywords:
+      - TPB
+      - Ngân hàng Thương mại Cổ phần Tiên Phong
+      - NGÂN HÀNG TMCP TIÊN PHONG
+      - TPBank
+    code:
+      TPB
+  9:
+    keywords:
+      - HDB
+      - Ngân hàng TMCP Phát triển Thành phố Hồ Chí Minh
+      - Ngân hàng thương mại cổ phần Phát triển Thành phố Hồ Chí Minh
+      - HDBank
+    code:
+      HDB
+  10:
+    keywords:
+      - VNM
+      - Công ty Cổ phần Sữa Việt Nam
+      - Vinamilk
+    code:
+      VNM
+  11:
+    keywords:
+      - MSN
+      - Công ty Cổ phần Tập đoàn MaSan
+      - MASAN CONSUMER
+      - MaSan
+    code:
+      MSN
+  12:
+    keywords:
+      - SBT
+      - Công ty Cổ phần Thành Thành Công - Biên Hòa
+      - CTCP Thành Thành Công - Biên Hòa
+    code:
+      SBT
+  13:
+    keywords:
+      - GAS
+      - Tổng Công ty Khí Việt Nam
+      - PV GAS
+    code:
+      GAS
+  14:
+    keywords:
+      - POW
+      - Tổng Công ty Điện lực Dầu khí Việt Nam
+      - PVPower
+    code:
+      POW
+  15:
+    keywords:
+      - PLX
+      - Tập đoàn Xăng dầu Việt Nam
+      - Petrolimex
+    code:
+      PLX
+  16:
+    keywords:
+      - SSI
+      - Công ty Cổ phần Chứng khoán SSI
+      - CTCP Chứng Khoán SSI
+    code:
+      SSI
+  17:
+    keywords:
+      - VJC
+      - Công ty Cổ phần Hàng không VietJet
+      - vietjet
+    code:
+      VJC
+  18:
+    keywords:
+      - FPT
+      - Công ty Cổ phần FPT
+    code:
+      FPT
+  19:
+    keywords:
+      - MWG
+      - Công ty Cổ phần Đầu tư Thế Giới Di Động
+    code:
+      MWG
+  20:
+    keywords:
+      - PNJ
+      - Công ty Cổ phần Vàng bạc Đá quý Phú Nhuận
+    code:
+      PNJ
+  21:
+    keywords:
+      - REE
+      - Công ty Cổ phần Cơ Điện Lạnh
+      - REE Corporation
+    code:
+      REE
+  22:
+    keywords:
+      - HPG
+      - Công ty Cổ phần Tập đoàn Hòa Phát
+      - HPG Group
+      - Tập đoàn Hòa Phát
+    code:
+      HPG
+  23:
+    keywords:
+      - BVH
+      - Tập đoàn Bảo Việt
+      - Tập đoàn Tài chính-Bảo hiểm Bảo Việt
+    code:
+      BVH
+  24:
+    keywords:
+      - KDH
+      - Công ty Cổ phần Đầu tư và Kinh doanh Nhà Khang Điền
+    code:
+      KDH
+  25:
+    keywords:
+      - PDR
+      - Công ty Cổ phần Phát triển Bất động sản Phát Đạt
+      - Công ty CP Phát triển Bất động sản Phát Đạt
+    code:
+      PDR
+  26:
+    keywords:
+      - NVL
+      - Công ty Cổ phần Tập đoàn Đầu tư Địa ốc No Va
+      - Novaland
+    code:
+      NVL
+  27:
+    keywords:
+      - TCH
+      - Công ty Cổ phần Đầu tư Dịch vụ Tài chính Hoàng Huy
+      - HOANG HUY GROUP
+    code:
+      TCH
+  28:
+    keywords:
+      - VRE
+      - Công ty Cổ phần Vincom Retail
+      - Vincom Retail
+    code:
+      VRE
+  29:
+    keywords:
+      - VHM
+      - Công ty Cổ phần Vinhomes
+      - Vinhomes
+    code:
+      VHM
+  30:
+    keywords:
+      - VIC
+      - Tập đoàn Vingroup - Công ty Cổ phần
+      - Vingroup
+    code:
+      VIC

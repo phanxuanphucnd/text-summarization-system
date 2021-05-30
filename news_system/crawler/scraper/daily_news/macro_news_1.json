@@ -1,0 +1,42 @@
+[
+    {
+        "name": "CafeF",
+        "group": "macro_news",
+        "start_url": "https://cafef.vn/vi-mo-dau-tu.chn",
+        "root_url": "https://cafef.vn",
+        "next_link": "https://cafef.vn/timeline/33/trang-{0}.chn",
+        "limit": 100
+    },
+    {
+        "name": "CafeF",
+        "group": "macro_news",
+        "start_url": "https://cafef.vn/tai-chinh-ngan-hang.chn",
+        "root_url": "https://cafef.vn",
+        "next_link": "https://cafef.vn/timeline/34/trang-{0}.chn",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "macro_news",
+        "start_url": "https://vietnambiz.vn/thoi-su/vi-mo.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/thoi-su/vi-mo/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "macro_news",
+        "start_url": "https://vietnambiz.vn/thoi-su/dau-tu.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/thoi-su/dau-tu/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "macro_news",
+        "start_url": "https://vietnambiz.vn/tai-chinh.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/tai-chinh/trang-{0}.htm",
+        "limit": 100
+    }
+]

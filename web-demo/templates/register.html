@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container m-auto">
+        <div id="content">
+            <div class="row">
+                <main role="main" class="mt-10">
+                    <div
+                        class="bg-white rounded text-center w-2/4 shadow-md m-auto border-t-8 border-blue-500 px-1 pt-5 pb-8">
+                        <div class="m-auto"><img class="w-32 m-auto" src="static/images/register.png" alt=""></div>
+                        <form action="/register" method="POST" class="w-11/12 mt-5 mx-auto">
+                            <!-- <a href="/register">
+                                <h2 style="color: black; text-align: center">REGISTER</h2>
+                            </a> -->
+
+                            <div class="d-block center">
+                                <p class="font-medium text-red-600 text-center mb-2"> {{ error_register }}</p>
+                                <div class="-mx-3 md:flex mb-2">
+                                    <div class="md:w-1/2 px-3 mb-3 md:mb-0">
+                                        <label
+                                            class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 text-left text-gray-600"
+                                            for="email">
+                                            Email
+                                        </label>
+                                        <input required
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+                                            id="email" name="email" type="email" placeholder="Email">
+                                    </div>
+                                    <div class="md:w-1/2 px-3">
+                                        <label
+                                            class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 text-left text-gray-600"
+                                            for="phone">
+                                            Phone
+                                        </label>
+                                        <input required
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                                            id="phone" name="phone" type="text" placeholder="Phone">
+                                    </div>
+                                </div>
+
+                                <div class="-mx-3 md:flex mb-3">
+                                    <div class="md:w-full px-3">
+                                        <label
+                                            class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2  text-left text-gray-600"
+                                            for="user_name">
+                                            Username
+                                        </label>
+                                        <input required
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3"
+                                            id="user_name" type="user_name" name="user_name" placeholder="Username">
+                                    </div>
+                                </div>
+
+                                <div class="-mx-3 md:flex mb-2">
+                                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <label
+                                            class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 text-left text-gray-600"
+                                            for="password">
+                                            Password
+                                        </label>
+                                        <input required
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+                                            id="password" name="password" type="password" placeholder="Password">
+                                    </div>
+                                    <div class="md:w-1/2 px-3">
+                                        <label
+                                            class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 text-left text-gray-600"
+                                            for="re_password">
+                                            Re-Password
+                                        </label>
+                                        <input required
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                                            id="re_password" name="re_password" type="password"
+                                            placeholder="Re-Password">
+                                    </div>
+                                </div>
+                                <div id="show_password"
+                                    class="px-3 mb-6 md:mb-0 text-right flex items-center justify-end">
+                                    <label class="flex items-center text-gray-600">
+                                        <input type="checkbox" onclick="changeTypePassword()"
+                                            class="rounded form-checkbox h-4 w-4 text-blue-600 cursor-pointer"><small
+                                            class="ml-2 text-gray-700">Show Password</small>
+                                    </label>
+                                </div>
+
+                                <button id='submit_register' name="submit_register" type="submit"
+                                    class="button_predict bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full my-2">
+                                    Submit
+                                </button>
+                                <a class="hover:text-blue-500 w-full text-center text-blue-500 font-medium"
+                                    href="/login">Do you already have an account ?</a>
+
+                        </form>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function changeTypePassword() {
+        var password = document.getElementById("password");
+        var re_password = document.getElementById("re_password");
+        if (password.type === "password") {
+            password.type = "text";
+            re_password.type = "text";
+        } else {
+            password.type = "password";
+            re_password.type = "password";
+        }
+    }
+</script>
+
+</html>

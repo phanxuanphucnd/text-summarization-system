@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <title>Daily News</title>
+
+
+    <!-- Import -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/daily_news.js') }}"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/tinymce.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="flex flex-wrap">
+        <div class="w-full">
+            <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-blue-500">
+                <div class="w-full mx-auto flex flex-wrap items-center justify-between">
+                    <div
+                        class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
+                        <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white font-medium"
+                            href="{{ url_for('home') }}">
+                            Home
+                        </a>
+                        <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white font-medium active"
+                            href="{{ '/daily_news' }}">
+                            Daily News
+                        </a>
+                        <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white font-medium"
+                            href="{{ '/morning_brief' }}">
+                            Morning Brief
+                        </a>
+                    </div>
+
+                    <div class="flex flex-wrap justify-end">
+                        <div class="w-full px-6">
+                            <div class="relative inline-flex align-middle w-full">
+                                <button class="w-48 focus:outline-none" style="transition:all .15s ease" type="button"
+                                    onclick="openDropdown(event, 'dropdown-id-settings', 'dropdown-id-logout')">
+                                    <img class="h-8 w-8 rounded-full object-cover m-auto" src="static/images/avatar.png"
+                                        alt="" />
+                                    <p class="text-xs" style="color: white;">{{ username_login }}</p>
+                                </button>
+                                <div class="hidden bg-white  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                                    style="min-width:12rem" id="dropdown-id-settings">
+                                    <a href="/vn_30"
+                                        class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                        Settings
+                                    </a>
+                                    <a href="/logout"
+                                        class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="w-full px-6 m-auto">
+        <main class="antialiased">
+            <div class="my-2 flex justify-between">
+                <div class="">
+                    <form action="/daily_news" method="POST">
+                        <div class="float-left flex">
+                            <div class="flex flex-col">
+                                <label for="search_group" class="text-xs text-blue-700">Group</label>
+                                <select id="search_group" name="search_group" value="{{group}}"
+                                    class="appearance-none h-full rounded-l  block appearance-none w-full bg-white text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option class="text-gray-700" value="Select a group">Select a group</option>
+                                    {% for site in sites_daily %}
+                                    {% if site == group %}
+                                    <option selected="selected" class="text-gray-700" value="{{site}}">{{site}}</option>
+                                    {% else %}
+                                    <option class="text-gray-700" value="{{site}}">{{site}}</option>
+                                    {% endif%}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="flex flex-col ml-3">
+                                <label for="code" class="text-xs text-blue-700">Start Date</label>
+                                <input type="date" id="search_start_dates" name="search_start_dates" value="{{s_date}}"
+                                    class="start appearance-none h-full rounded-l  block appearance-none w-ful bg-white border-gray-200 text-gray-700 py-2 px-4 pr-8  leading-tight focus:outline-none focus:bg-white focus:border-gray-200">
+                            </div>
+                            <div class="flex flex-col ">
+                                <label for="code" class="text-xs text-blue-700 ">End Date</label>
+                                <input type="date" id="search_end_dates" name="search_end_dates" value="{{e_date}}"
+                                    class="end appearance-none h-full rounded-r border-l block appearance-none w-ful bg-white border-gray-100 text-gray-700 py-2 px-4 pr-8  leading-tight focus:outline-none focus:bg-white focus:border-gray-200">
+                            </div>
+                        </div>
+
+                        <div class="float-left mt-2 mx-5">
+                            <button type="submit" id="submit_filter" name="submit_filter" value="submit"
+                                class="button_predict bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full my-2 focus:outline-none">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="flex items-center">
+                    <form name="search-form" action="/daily_search" method="POST" onsubmit="return validate()">
+                        <div class="relative text-gray-600 mr-3">
+                            <input type="search" id="search_keyword" name="search_keyword" placeholder="Search"
+                                class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                            <button type="submit" id="search_filter" name="search_filter"
+                                class="absolute right-0 top-0 mt-3 mr-4">
+                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                                    xml:space="preserve" width="512px" height="512px">
+                                    <path
+                                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    {% if data_shape[0] != 0 %}
+                    <form action="/export_excel" method="POST">
+                        <input type="hidden" name="group" value="daily_news" />
+                        <button type="submit" value="submit" id="export_submit"
+                            class="flex items-center bg-gray-100 justify-center h-12 rounded px-4 text-blue-700">
+                            <a class="text-xs font-medium mr-2 cursor-pointer">Excel Files</a>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                            </svg>
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if data_shape[0] != 0 %}
+            <div class="py-4 overflow-x-auto">
+                <div class="w-full shadow rounded-lg overflow-scroll">
+                    <table class="w-full leading-normal" id="table_dailynews">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    ID
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Title
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Published
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Category
+                                </th>
+                                {% if "stock_code" in tables.columns %}
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Stock Code
+                                </th>
+                                {% endif %}
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Brief Content
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Extractive Summary
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Word Count
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                                    Rank
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    <i data-feather="settings"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for idx_row, news in tables.iterrows() %}
+                            <tr id="tr-{{ idx_row }}">
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 break-words text-center">
+                                        {{ loop.index + (page - 1) * per_page }}
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 break-words text-center w-32">
+                                        <a class="text-blue-500" href="{{ tables['Source Url'][idx_row] }}"
+                                            target="_blank">{{
+                                            tables['Title'][idx_row] }}</a>
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 break-words text-center">
+                                        {{
+                                        tables['Published'][idx_row] }}</p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 whitespace-no-wrap text-center">
+                                        <span
+                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden
+                                                class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative"> {{ tables['Category'][idx_row] }}</span>
+                                        </span>
+                                    </p>
+                                </td>
+                                {% if "stock_code" in tables.columns %}
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 w-24 text-center">
+                                        <span
+                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden
+                                                class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative"> {{ tables['Stock Code'][idx_row] }}</span>
+                                        </span>
+                                    </p>
+                                </td>
+                                {% endif %}
+                                <td
+                                    class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center w-1/4 max-w-xs">
+                                    <p class="fix-width-summary break-words m-auto justify-center">
+                                        {{ tables['Summary'][idx_row] | safe }}
+                                    </p>
+                                </td>
+                                <td
+                                    class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center w-1/4 max-w-xs">
+                                    <p class="fix-width-summary break-words m-auto justify-center">
+                                        {{ tables['Text Rank'][idx_row] | safe }}
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 break-words text-center">
+                                        {{ tables['Word Count'][idx_row] | safe }}
+                                    </p>
+                                </td>
+                                <td class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center">
+                                    <p class="text-gray-900 break-words text-center">
+                                        {{ tables['Rank'][idx_row] | safe }}
+                                    </p>
+                                </td>
+                                <td
+                                    class="px-2 py-2 border-b border-gray-200 bg-white text-sm text-center text-blue-500">
+                                    <button type="button"
+                                        onclick="openDropdown(event, 'dropdown-edit-settings-{{ idx_row }}')"
+                                        style="transition: all .15s ease"><i data-feather="edit"></i></button>
+                                    <div class="hidden bg-white  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
+                                        style="min-width:12rem" id="dropdown-edit-settings-{{ idx_row }}">
+                                        <a onclick="toggleModal('modal-id', 'tr-{{idx_row}}');openDropdown(event, 'dropdown-edit-settings-{{ idx_row }}');"
+                                            href="#"
+                                            class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                            Edit
+                                        </a>
+                                        <a href="/set_top?url={{tables['Source Url'][idx_row]}}&callback=daily_news&category={{tables['Category'][idx_row]}}"
+                                            onclick="openDropdown(event, 'dropdown-edit-settings-{{ idx_row }}');"
+                                            class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                            Mark as important
+                                        </a>
+                                        <a href="/six_news?url={{tables['Source Url'][idx_row]}}&callback=daily_news&category={{tables['Category'][idx_row]}}"
+                                            onclick="openDropdown(event, 'dropdown-edit-settings-{{ idx_row }}');"
+                                            class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800">
+                                            Insert to six news
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                {{ pagination.links }}
+            </div>
+            {% endif %}
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+        id="modal-id">
+        <div class="relative w-7/12 my-6 mx-auto max-w-4xl my-auto max-y-4yl">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+                    <h4 class="text-2xl font-semibold" id="edit-hearder">
+                        EDIT
+                    </h4>
+                </div>
+                <!--body-->
+                <form action="" method="" id="form-update">
+                    <div class="relative p-6 flex-auto">
+                        <div class="mb-3 pt-0">
+                            <select id="edit-site" name="site" onchange="changeSite(this);" value="{{group}}"
+                                class="appearance-none h-full rounded-l  block appearance-none w-full bg-white text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                {% for site in sites_daily %}
+                                <option class="text-gray-700" value="{{site}}">{{site}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3 pt-0">
+                            <textarea
+                                class="px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border border-gray-400 outline-none focus:outline-none focus:shadow-outline w-full"
+                                name="text_rank" id="editor_textrank" cols="30" rows="5">TEXT RANK</textarea>
+                        </div>
+
+                        <div class="mb-3 pt-0">
+                            <p class="px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border border-gray-400 outline-none focus:outline-none focus:shadow-outline w-full"
+                                name="url" id="editor_url" cols="30" hidden="hidden" rows="5">url</p>
+                        </div>
+                    </div>
+                    <!--footer-->
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
+                        <button type="button"
+                            class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                            type="button" style="transition: all .15s ease" onclick="toggleModal('modal-id');">
+                            Close
+                        </button>
+                        <button type="button"
+                            class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                            type="button" style="transition: all .15s ease" onclick="update('modal-id');">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
+    <script>
+        var stringToHTML = function (str) {
+            var dom = document.createElement('div');
+            dom.innerHTML = str;
+            return dom;
+        };
+
+        var m = {
+            'Macro news': 'macro_news',
+            'International news': 'international_news',
+            'Stock market news': 'stock_market'
+        };
+
+        feather.replace();
+
+        /* Dropdown*/
+        function openDropdown(event, dropdownID) {
+            let element = event.target;
+            var popper = new Popper(element, document.getElementById(dropdownID), {
+                placement: 'bottom-start'
+            });
+            document.getElementById(dropdownID).classList.toggle("hidden");
+            document.getElementById(dropdownID).classList.toggle("block");
+        }
+
+        //   Modal
+        function toggleModal(modalID, row_id) {
+            var row = document.getElementById(row_id);
+            console.log(row)
+            document.getElementById(modalID).classList.toggle("hidden");
+            document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+            if (row) {
+                document.getElementById('form-update').setAttribute("row-id", row_id);
+                document.getElementById("editor_textrank").value = row.children[5].children[1].innerText;
+                document.getElementById("edit-hearder").innerText = row.children[1].children[0].innerText;
+                var cat = row.children[3].firstElementChild.firstElementChild.children[1].innerText;
+                var options = document.getElementById('edit-site').children;
+                for (var i = 0; i < options.length; i++) {
+                    if (m[options[i].value] == cat) {
+                        options[i].selected = 'selected';
+                    }
+                }
+                document.getElementById('editor_url').innerText = row.children[1].children[0].children[0].href;
+            }
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.toggle("hidden");
+        }
+
+
+        function update(modalID) {
+            document.getElementById(modalID).classList.toggle("hidden");
+            document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+            var row_id = document.getElementById('form-update').getAttribute("row-id");
+            var row = document.getElementById(row_id);
+            var post_data = {
+                url: document.getElementById('editor_url').innerText,
+                category: m[document.getElementById('edit-site').value],
+                old_category: row.children[3].firstElementChild.firstElementChild.children[1].innerText,
+                text_rank: document.getElementById("editor_textrank").value
+            }
+            $.post("update", post_data, function (data, status) {
+                console.log(data);
+                console.log(status);
+                if (status == "success") {
+                    row.children[3].firstElementChild.firstElementChild.children[1].innerText = post_data['category'];
+                    row.children[5].children[1].innerText = post_data['text_rank'];
+                }
+            });
+        }
+
+        function validate() {
+            var x = document.forms["search-form"]["search_keyword"].value.trim();
+            if (x == "") {
+                alert("Keyword must be filled out");
+                return false;
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

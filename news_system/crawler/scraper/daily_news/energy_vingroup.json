@@ -1,0 +1,30 @@
+[
+    {
+        "name": "vingroup",
+        "group": "vingroup",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "oil_and_gas",
+        "start_url": "https://vietnambiz.vn/hang-hoa/nang-luong.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/hang-hoa/nang-luong/trang-{0}.htm",
+        "limit": 100
+    },
+    {
+        "name": "ndh",
+        "group": "oil_and_gas",
+        "start_url": "https://ndh.vn/hang-hoa/nang-luong",
+        "root_url": "https://ndh.vn",
+        "limit": 100
+    },
+    {
+        "name": "Vietnambiz",
+        "group": "others",
+        "start_url": "https://vietnambiz.vn/doanh-nghiep.htm",
+        "root_url": "https://vietnambiz.vn",
+        "next_link": "https://vietnambiz.vn/doanh-nghiep/trang-{0}.htm",
+        "limit": 100
+    }
+]
