@@ -1,2 +1,0 @@
-./classifier/train.py –-from-pretrained classifier/models/dailynews_best.model --train_path './data/daily_v2_train.csv'--test_path './data/daily_v2_test.csv' --epochs 15 --lr 1e-5 --bs 16 --name classifier/models/dailynews_best.model
-./classifier/train.py -–from-pretrained classifier/models/morning_brief_best.model --train_path './data/daily_v2_train.csv'--test_path './data/daily_v2_test.csv' --epochs 15 --lr 1e-5 --bs 16 --name classifier/models/morning_brief_best.model
